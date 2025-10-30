@@ -1,0 +1,17 @@
+.git
+.gitignore
+node_modules
+vendor
+tmp
+*.log
+.env
+**/.env
+.vscode
+Thumbs.db
+*.bak
+*.tmp
+*.DS_Store
+
+
+
+

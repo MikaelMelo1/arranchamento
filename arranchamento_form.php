@@ -1,5 +1,7 @@
+<!-- Ten Jonas - Divisão de Tecnologia da Informação - EASA -->
 <!DOCTYPE html>
 <html>
+<!-- MEMO: update me with `git checkout gh-pages && git merge master && git push origin gh-pages` -->
 <head>
   <link rel="icon" href="./favicon.ico">  
 <?php
@@ -37,106 +39,6 @@ $logado = $_SESSION['login'];
 
   <link href="./material_design/dependencias/snackbar.min.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body {
-      background: #f5f5f5;
-      font-family: 'Roboto', Arial, sans-serif;
-    }
-    .main-card {
-      margin: 40px auto;
-      max-width: 740px;
-      box-shadow: 0 8px 32px rgba(30,30,60,0.10);
-      background: #fff;
-      border-radius: 18px;
-      padding: 0 0 18px 0;
-    }
-    .panel-heading {
-      background: #e3f2fd!important;
-      border-radius: 18px 18px 0 0;
-      padding: 12px 24px;
-      margin-bottom: 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .panel-heading .painel-title {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 1.6rem;
-      font-weight: 600;
-      color: #2196F3;
-      margin: 0;
-    }
-    .panel-heading .painel-actions a {
-      margin-left: 12px;
-      opacity: .7;
-      transition: opacity .12s;
-    }
-    .panel-heading .painel-actions a:hover {
-      opacity: 1;
-    }
-    .painel-title img {
-      height: 42px;
-    }
-    .dias-table th, .dias-table td {
-      vertical-align: middle !important;
-      text-align: center !important;
-      border: none !important;
-      font-size: 1rem;
-      padding: 3px 2px;
-    }
-    .dias-table th:first-child {
-      text-align: right;
-      color: #424242;
-      font-weight: bold;
-    }
-    .dias-table {
-      background: #fff;
-      width: 100%;
-      margin-bottom: 7px;
-    }
-    .ref-icon {
-      width: 26px;
-      height: 26px;
-      object-fit: contain;
-      filter: drop-shadow(0 2px 2px rgba(0,0,0,.10));
-    }
-    .saudacao {
-      font-size: 1.2rem;
-      margin: 8px auto 0 auto;
-      color: #2196F3;
-      font-weight: bold;
-      background: #e3f2fd;
-      display: inline-block;
-      padding: 5px 26px;
-      border-radius: 13px;
-      box-shadow: 0 1px 5px rgba(40,100,250,0.08);
-    }
-    .panel-body {
-      padding: 22px 16px 2px 16px;
-      border-radius: 0 0 18px 18px;
-      background: #ffffff;
-    }
-    .modal-footer {
-      display: flex;justify-content: flex-end;background: none !important;border:none !important;box-shadow:none;
-    }
-    .like-btn{
-      background: url(./img/like_48x48.png) no-repeat center center/contain;
-      border:0;height:48px;width:48px;box-shadow:none;
-      margin-left:auto;margin-right:auto;
-    }
-    .dias-table tr:not(:first-child) th {
-      font-weight: normal;
-    }
-    @media (max-width: 600px) {
-      .main-card {max-width:98vw;}
-      .panel-heading {padding:7px 7px;}
-      .panel-body {padding:7px 2px 2px 2px;}
-      .saudacao {padding:5px 2vw;}
-      .like-btn {height: 38px;width: 38px;}
-    }
-  </style>
 
 <?php
 $dias_semana = array(
@@ -242,33 +144,48 @@ $row = $result->fetch_object();
 
 <div class="container" id="container">
 
-  <!-- Form Arranchamento ================================================== -->  
-  <div class="panel panel-info main-card">
+  <!-- Form Arranchamento
+================================================== -->  
+  <div class="panel panel-info" style="margin-top: -21px" >
     <div class="panel-heading">
-      <div class="painel-title">
-        <img src="./img/arranchamento_72x72.png" alt="Arranchamento Logo">
-        Arranchar
-      </div>
-      <div class="painel-actions">
-         <a href="logout.php" title="Sair"><img src="./img/sair.png" height="28"></a>
-         <a href="editar_conta.php" title="Editar minha Conta"><img src="./img/editar.png" height="28"></a>
-         <?php if($_SESSION['tipo_acesso']=='ADMINISTRADOR'){ print('<a href="administrador.php" title="Voltar"><img src="./img/voltar.png" height="28"></a>'); } ?>
-      </div>
+		<table style="width:100%" >
+		  <tr>
+			<th >
+			    <img src="./img/arranchamento_72x72.png" height="48">
+				<font style="font-size:16px;margin-left:2px;position: relative;top: 7px"><b>Arranchar</font>			
+			</th>
+			<th style="text-align:right">
+				 <a href="logout.php" title="Sair" class="botaosair"><img src="./img/sair.png" ></a>
+				 <a href="editar_conta.php" title="Editar minha Conta" class="botaosair"><img src="./img/editar.png" ></a>
+				 <?php //se é administrador mostra botão de retorno para a área administrativa
+                    if($_SESSION['tipo_acesso']=='ADMINISTRADOR'){
+                        print("
+                            <a href=\"administrador.php\" title=\"Voltar\" class=\"botaosair\"><img src=\"./img/voltar.png\" ></a>
+                        ");                
+                    }
+                ?>
+			</th>
+		  </tr>
+		</table>
+	  
     </div>
     <div class="panel-body">
-      <span class="saudacao">
-        <?php echo bomdia().", ".$row->posto." ".$row->nomeguerra; ?>
-      </span>
-      <span style="margin-left:8px;font-size:.9rem;color:#888;"> <?php echo hora()." - ".$_SESSION['tipo_acesso']; ?> </span>
-      <hr style="margin:10px 0 16px 0;">
-      <table class="dias-table">
-        <tr>
-          <th style="width:50%;text-align:right"><h4 style="margin:0;font-size:1.10rem;font-weight:700;color:#1976D2">Dias/Refeições</h4></th>    
-          <th><img class="ref-icon" src='./img/cafe.png' title="Café da manhã"></th>    
-          <th><img class="ref-icon" src='./img/almoco.png' title="Almoço"></th>   
-          <th><img class="ref-icon" src='./img/jantar.png' title="Jantar"></th>
-        </tr>
-      </table>
+        <form method="post" class="form-horizontal" style="color: black" action="arrancha.php" id="form_arrancha" name="form_arrancha">
+            <center><h3 style="color:black"><b>
+            <?php
+            //Retorna a saudação: Bom dia, Boa tarde...
+            echo bomdia().", "; echo "$row->posto"." "."$row->nomeguerra"; ?></b></h3></center><br>
+			<?php echo "".hora();
+            echo " - ".$_SESSION['tipo_acesso'];
+            ?>
+            <table style="width:100%;line-height: 200%; border-top: 3px solid rgb(40,40,40);">
+                <tr>
+                    <th style="width:50%"><h4>Dias/Refeições</h4></th>    
+                    <th><!--ICONE CAFÉ--><img src='./img/cafe.png'></th>    
+                    <th><!--ICONE ALMOÇO--><img src='./img/almoco.png'></th>   
+                    <th><!--ICONE JANTAR--><img src='./img/jantar.png'></th>
+                </tr>
+            </table>
 
             <?php
 			  
@@ -440,7 +357,8 @@ $row = $result->fetch_object();
               
             ?>
             <div class="modal-footer">
-              <button type="submit" class="like-btn"></button>
+              <button type="submit" style="background: url(./img/like_48x48.png);border:0; display:block;height:48px;width:48px;
+                                position: fixed;left:80%;bottom: 15px;z-index: 1;"></button>
             </div>          
         </form>
     </div>
