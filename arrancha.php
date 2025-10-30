@@ -3,6 +3,7 @@
 <head>
   <link rel="icon" href="./favicon.ico">
 <?php 
+// ESTE ARQUIVO JÁ CRIA A VARIÁVEL $conexao SEGURA
 require_once "./inc/conf.php";
 
 //Verifica se o usuário está logado, se não vai para tela de login
@@ -19,12 +20,7 @@ $logado = $_SESSION['login'];
 
 <body style="background-color: #272729">
 
-<!--VARIÁVEIS DE DATAS E CONEXÃO-->
 <?php
-//Conexão ao banco
-$conexao = new mysqli($host,$user,$pass,$db);
-mysqli_set_charset($conexao , "utf8");
-if (!$conexao){die("A conexão falhou: " . $conexao->connect_error);}
 
 //Hierarquia do militar - Faz busca para encontrar o código do militar
 $arranch0 = "select * from militares where cpf='$logado'";
@@ -40,7 +36,8 @@ for($i=0;$i<=$nr_dias;$i++){
     $row = $result->fetch_object();
     
     //Variável que pega o $_POST['almoco_justificativa'.$i]) do arquivo arranchamento_form.php
-    $justificativa_sexta = $_POST['almoco_justificativa'.$i];
+    // Corrigido para evitar 'Undefined array key'
+    $justificativa_sexta = isset($_POST['almoco_justificativa'.$i]) ? $_POST['almoco_justificativa'.$i] : NULL;
     
     if($result->num_rows>0 ){//Se já tem registro gravado nesta data "UPDATE"        
         //Se todas as opções não estiverem marcadas, exclui a linha da tabela
@@ -50,36 +47,35 @@ for($i=0;$i<=$nr_dias;$i++){
         }        
         else {
             //Atualiza registro existentes
-            if(isset($_POST['checkcaf'.$i]) ) { $cafaux = 'S'; } else { $cafaux = 'N'; }            
+            if(isset($_POST['checkcaf'.$i]) ) { $cafaux = 'S'; } else { $cafaux = 'N'; }          
             if(isset($_POST['checkalm'.$i]) ) { $almaux = 'S'; } else { $almaux = 'N'; }
             if(isset($_POST['checkjan'.$i]) ) { $janaux = 'S'; } else { $janaux = 'N'; }  
-            $conexao->query("UPDATE arranchamento SET cafe = '$cafaux', almoco = '$almaux', jantar = '$janaux', 	justificativa_sexta = '$justificativa_sexta' WHERE data='$dia_sql' and cpf='$logado'");
+            
+            // Adicionado "mysqli_real_escape_string" para segurança
+            $just_segura = mysqli_real_escape_string($conexao, $justificativa_sexta);
+            $conexao->query("UPDATE arranchamento SET cafe = '$cafaux', almoco = '$almaux', jantar = '$janaux',     justificativa_sexta = '$just_segura' WHERE data='$dia_sql' and cpf='$logado'");
         }
-
-        //$conexao->query("UPDATE arranchamento SET cafe = 's' WHERE data='$dia1' and cod_mil='$cod_mil'");
     }
     else //Se não tem registro gravado nesta data "INSERT"
     {
-        //Insere os registros novos
-        if(isset($_POST['checkcaf'.$i]) ) { $cafaux = 'S'; } else { $cafaux = 'N'; }            
-        if(isset($_POST['checkalm'.$i]) ) { $almaux = 'S'; } else { $almaux = 'N'; }
-        if(isset($_POST['checkjan'.$i]) ) { $janaux = 'S'; } else { $janaux = 'N'; }        
-        $conexao->query("INSERT INTO arranchamento (cpf,data,cafe,almoco,jantar,hierarquia,justificativa_sexta) VALUES ('$logado','$dia_sql','$cafaux','$almaux','$janaux','$hierarquia','$justificativa_sexta')"); 
+        // Só insere se pelo menos um estiver marcado
+        if(!empty($_POST['checkcaf'.$i]) or !empty($_POST['checkalm'.$i]) or !empty($_POST['checkjan'.$i]) ){
+            //Insere os registros novos
+            if(isset($_POST['checkcaf'.$i]) ) { $cafaux = 'S'; } else { $cafaux = 'N'; }          
+            if(isset($_POST['checkalm'.$i]) ) { $almaux = 'S'; } else { $almaux = 'N'; }
+            if(isset($_POST['checkjan'.$i]) ) { $janaux = 'S'; } else { $janaux = 'N'; }
+            
+            // Adicionado "mysqli_real_escape_string" para segurança
+            $just_segura = mysqli_real_escape_string($conexao, $justificativa_sexta);
+            $conexao->query("INSERT INTO arranchamento (cpf,data,cafe,almoco,jantar,hierarquia,justificativa_sexta) VALUES ('$logado','$dia_sql','$cafaux','$almaux','$janaux','$hierarquia','$just_segura')"); 
+        }
     }
-    
-
-    
-    
-    
-    
 }
 ?>
 
 <a style="position:absolute;top:50%;left:30%;color: #fe9400;font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;font-weight: 300;">Arranchamento realizado...</a>
 
 
-<!-- Função para retornar a página do arranchamento-->
-<!-- 2000 = 2 segundos - Tempo para executar-->
 <script>
 contatempo();
 function contatempo(){
