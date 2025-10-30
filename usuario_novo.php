@@ -5,21 +5,16 @@
     <title>Arranchamento</title>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
     
-      <!-- Material Design fonts -->
       <link rel="stylesheet" href="./material_design/dependencias/roboto.css" type="text/css">
       <link href="./material_design/dependencias/materialicons" rel="stylesheet">
 
-
-
-      <!-- Bootstrap Material Design -->
       <link href="material_design/dist/css/bootstrap-material-design.css" rel="stylesheet">
       <link href="material_design/dist/css/ripples.min.css" rel="stylesheet">
-
 
       <link href="./material_design/dependencias/snackbar.min.css" rel="stylesheet">
       <meta name="viewport" content="width=device-width, initial-scale=1">      
 
-   <?php    
+    <?php     
     //Includes e teste de sessão
     require_once "./inc/conf.php";
     
@@ -39,10 +34,29 @@
     $funcao = $_POST['funcao'];
     $graduacao = $_POST['graduacao'];
     
-    //Conexão ao banco
-    $conexao = new mysqli($host,$user,$pass,$db);
+
+    // ==================================================
+    // INÍCIO DA CORREÇÃO (CONEXÃO COM SSL/TLS)
+    // ==================================================
+    
+    // 1. Inicializa o MySQLi
+    $conexao = mysqli_init();
+    if (!$conexao) {
+        die("mysqli_init falhou");
+    }
+
+    // 2. DIZ AO PHP PARA USAR SSL/TLS
+    mysqli_ssl_set($conexao, NULL, NULL, NULL, NULL, NULL);
+
+    // 3. Conecta usando as variáveis do conf.php (incluindo $port)
+    // A flag MYSQLI_CLIENT_SSL é a parte mais importante
+    if (!mysqli_real_connect($conexao, $host, $user, $pass, $db, (int)$port, NULL, MYSQLI_CLIENT_SSL)) {
+        die("Erro ao conectar (" . mysqli_connect_errno() . "): " . mysqli_connect_error());
+    }
+
+    // Define o charset APÓS a conexão
     mysqli_set_charset($conexao , "utf8");
-    if (!$conexao){die("A conexão falhou: " . $conexao->connect_error);}
+
     
     //Códicos de hierarquia
     $hierarquia = array(
@@ -81,7 +95,8 @@
         //Insere o novo usuário
         if(!$conexao->query("INSERT INTO militares (nomeguerra,nomecompleto,numero,arma,turma,ativo,cpf,senha,tipo_acesso,datacadastro,usuario_novo,funcao,posto,hierarquia) VALUES ('$nomeguerra','$nomecompleto',$numero,'$arma','$turma','S','$cpf','$senha','$tipo_acesso','$datacadastro','$usuario_novo','$funcao','$graduacao',$hierarquia[$graduacao])"))
         {
-            printf("Errormessage: %s\n", $mysqli->error);
+            // Corrigido: use $conexao->error, não $mysqli->error
+            printf("Errormessage: %s\n", $conexao->error);
         }
         print("<a style=\"position:absolute;top:50%;left:30%;color: #fe9400;font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;font-weight: 300;\">Usuário cadastrado com sucesso!</a>");
         //Aqui conta o tempo determinado e volta para a página de login
@@ -105,10 +120,7 @@
     
     
     
-<!-- Função para retornar a página de login-->
-<!-- 2000 = 2 segundos - Tempo para executar-->
-
-
+    
 </body>
 
 </html>
