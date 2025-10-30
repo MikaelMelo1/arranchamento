@@ -523,11 +523,11 @@ $row = $result->fetch_object();
                  border-radius: 50%;
                  z-index: 10;
                  
-                 /* --- SUAS ALTERAÇÕES CORRIGIDAS --- */
-                 position: fixed;   /* <-- ADICIONE ISSO */
+                 
+                 position: fixed;  
                  left: 50%;
-                 bottom: 15px;      /* <-- Mantém na base */
-                 transform: translateX(-50%); /* <-- Apenas 'X' para centralizar horizontalmente */
+                 bottom: 15px;    
+                 transform: translateX(-50%); 
                  ">
   </button>
 </div>      
