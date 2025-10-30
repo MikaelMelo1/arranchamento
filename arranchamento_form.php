@@ -286,10 +286,6 @@ function dia($i,$dia,$semana,$cor,$lock_cafe,$lock_almoco,$lock_jantar,
 <body >
 
 <?php
-//Conexão ao banco
-$conexao = new mysqli($host,$user,$pass,$db);
-mysqli_set_charset($conexao , "utf8");
-if (!$conexao){die("A conexão falhou: " . $conexao->connect_error);}
 
 $seleciona = "select * from militares where cpf='$logado'";
 $result = $conexao->query($seleciona);
