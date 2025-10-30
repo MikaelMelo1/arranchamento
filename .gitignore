@@ -1,0 +1,16 @@
+# Ignorar arquivo de variáveis de ambiente
+.env
+
+# Arquivos e pastas do XAMPP/WAMP/VSCode
+*.log
+*.bak
+*.tmp
+.vscode/
+*.DS_Store
+Thumbs.db
+
+# Dependências e arquivos temporários comuns
+node_modules/
+vendor/
+
+arranchamento.sql

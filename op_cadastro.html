@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html><head>
+
+  
+  <meta charset="utf-8">
+
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  
+  <link rel="icon" href="./favicon.ico">
+  <title>Arranchamento Digital</title>
+
+  
+<!--CSS de complemento-->
+  
+  <link href="./complemento.css" rel="stylesheet">
+
+<!-- Material Design fonts -->
+  
+  <link rel="stylesheet" href="./material_design/dependencias/roboto.css" type="text/css">
+
+  
+  <link href="./material_design/dependencias/materialicons" rel="stylesheet">
+
+<!-- Bootstrap -->
+  
+  <link href="./material_design/dependencias/bootstrap.min.css" rel="stylesheet">
+
+<!-- Bootstrap Material Design -->
+  
+  <link href="material_design/dist/css/bootstrap-material-design.css" rel="stylesheet">
+
+  
+  <link href="material_design/dist/css/ripples.min.css" rel="stylesheet">
+
+  
+  <link href="./material_design/dependencias/snackbar.min.css" rel="stylesheet">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head><body>
+<div class="container"><!-- Form 
+
+================================================== -->
+<div class="panel panel-info">
+<div class="panel-heading">
+<table style="width: 100%;">
+  <tbody>
+    <tr>
+      <th> <img src="./img/arranchamento_72x72.png" height="48"> <font style="font-size: 16px; margin-left: 2px; position: relative; top: 7px;"><b>Tipo
+de cadastro</b></font>
+      <b> </b></th>
+      <th> <button onclick="history.back();" class="buttonvoltar"></button>
+      </th>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="panel-body" method="post">
+<form class="form-horizontal" method="post" action="cadastro.php" id="formlogin" name="formlogin">
+  <div class="form-group">
+  <div class="col-md-10">
+  <div class="radio"> <label> <input name="optionsRadios" id="optionsRadios1" value="cp" checked="checked" type="radio"> <font color="#??????">Efetivo Profissional</font> </label> </div>
+  <div class="radio radio-primary"> <label> <input name="optionsRadios" id="optionsRadios1" value="alu" type="radio"><font color="#??????">
+Efetivo Variável </font></label> </div>
+<!--
+
+        <div class="radio radio-primary">
+
+          <label>
+
+            <input name="optionsRadios" id="optionsRadios1" value="adm" type="radio">
+
+            Administrador
+
+          </label>
+
+          <br><font style="color:red;font-size: 12px;margin-left: 40px;font-weight: 200;">* Mediante autorização do Escalão Superior</font>
+
+        </div>-->
+  </div>
+  </div>
+  <div class="modal-footer"> <button type="submit" class="btn btn-raised btn-success">Confirmar</button> </div>
+</form>
+</div>
+</div>
+<br>
+<script src="material_design/dependencias/jquery-1.10.2.min.js"></script>
+<script src="material_design/dependencias/bootstrap.min.js"></script>
+<script>
+</script>
+<script src="material_design/dist/js/ripples.min.js"></script>
+<script src="material_design/dist/js/material.min.js"></script>
+<script src="material_design/dependencias/snackbar.min.js"></script>
+<script src="material_design/dependencias/jquery.nouislider.min.js"></script>
+<script>
+  $(function () {
+    $.material.init();
+    $(".shor").noUiSlider({
+      start: 40,
+      connect: "lower",
+      range: {
+        min: 0,
+        max: 100
+      }
+    });
+
+    $(".svert").noUiSlider({
+      orientation: "vertical",
+      start: 40,
+      connect: "lower",
+      range: {
+        min: 0,
+        max: 100
+      }
+    });
+  });
+</script></div>
+
+</body></html>

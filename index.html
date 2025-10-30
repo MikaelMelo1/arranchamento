@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="icon" href="./favicon.ico">
+  <title>Arranchamento Digital - 13º GAC</title>
+  <link rel="stylesheet" href="./complemento.css" type="text/css">
+  <!-- Material Design fonts -->
+  <link rel="stylesheet" href="./material_design/dependencias/roboto.css" type="text/css">
+  <link href="./material_design/dependencias/materialicons" rel="stylesheet">
+  <!-- Bootstrap -->
+  <link href="./material_design/dependencias/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Material Design -->
+  <link href="material_design/dist/css/bootstrap-material-design.css" rel="stylesheet">
+  <link href="material_design/dist/css/ripples.min.css" rel="stylesheet">
+  <link href="./material_design/dependencias/snackbar.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      background: #f5f5f5; /* Cinza claro Material Design */
+    }
+    .login-wrapper {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .panel {
+      box-shadow: 0 8px 24px rgba(60,60,60,0.18);
+      border-radius: 12px;
+    }
+    .bd-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .login-title {
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #2196F3;
+      margin: 0;
+    }
+    .material-icons {
+      vertical-align: middle;
+    }
+    .panel-heading {
+      background: #e3f2fd!important;
+      border-radius: 12px 12px 0 0;
+      text-align: center;
+    }
+    .form-group label {
+      color: #2196F3;
+    }
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+    }
+  </style>
+</head>
+<body>
+<div class="login-wrapper">
+  <div class="container" style="max-width: 400px;">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <div class="bd-logo">
+          <img src="./img/arranchamento_72x72.png" height="48" alt="Arranchamento Logo">
+          <span class="login-title">Arranchamento Digital</span>
+        </div>
+      </div>
+      <div class="panel-body">
+        <form class="form-horizontal" method="post" action="ope.php" id="formlogin" name="formlogin">
+          <div class="form-group">
+            <label for="inputEmail" class="col-md-3 control-label">CPF</label>
+            <div class="col-md-9">
+              <input class="form-control" name="login" id="login" type="number" placeholder="Seu CPF">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPassword" class="col-md-3 control-label">Senha</label>
+            <div class="col-md-9">
+              <input class="form-control" name="senha" id="senha" type="password" placeholder="Sua senha">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-md-12" style="text-align:right">
+              <small>Não tem uma conta? <a href="./op_cadastro.html">Crie uma!</a></small>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-raised btn-success" style="width:100%">Conectar-se</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:20px;color:#999">
+      <img src="./img/logo_easa.png" alt="EASA" height="32">
+      
+      <div style="font-size:12px">Sistema do 13º GAC - Exército Brasileiro</div>
+    </div>
+  </div>
+</div>
+<script src="material_design/dependencias/jquery-1.10.2.min.js"></script>
+<script src="material_design/dependencias/bootstrap.min.js"></script>
+<script src="material_design/dist/js/ripples.min.js"></script>
+<script src="material_design/dist/js/material.min.js"></script>
+<script src="material_design/dependencias/snackbar.min.js"></script>
+<script src="material_design/dependencias/jquery.nouislider.min.js"></script>
+<script>
+  $(function () {
+    $.material.init();
+  });
+</script>
+</body>
+</html>
