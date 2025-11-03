@@ -508,25 +508,45 @@ $row = $result->fetch_object();
               
             ?>
             
-          <div class="modal-footer">
+          <div class="modal-footer"
+     style="position: fixed; 
+            bottom: 15px; 
+            left: 50%; 
+            transform: translateX(-50%);
+            display: flex; 
+            gap: 20px; 
+            justify-content: center;
+            z-index: 10;">
+  
+  <!-- Botão de Like -->
   <button type="submit" 
-          style="background: url(./img/like_48x48.png);
+          title="Confirmar Arranchamento"
+          style="background: url(./img/like_48x48.png) no-repeat center;
+                 background-size: contain;
                  border: 0; 
                  height: 48px; 
                  width: 48px;
                  cursor: pointer;
                  box-shadow: 0 2px 5px rgba(0,0,0,0.26);
-                 border-radius: 50%;
-                 z-index: 10;
-                 
-                 
-                 position: fixed;  
-                 left: 50%;
-                 bottom: 15px;    
-                 transform: translateX(-50%); 
-                 ">
+                 border-radius: 50%;">
   </button>
-</div>      
+
+  <!-- Botão de Ver Cardápio -->
+  <button type="button"
+          onclick="window.location.href='cardapio.php'" 
+          title="Ver Cardápio"
+          style="background: url(./img/cardapio.jpg) no-repeat center;
+                 background-size: contain;
+                 border: 0; 
+                 height: 48px; 
+                 width: 48px;
+                 cursor: pointer;
+                 box-shadow: 0 2px 5px rgba(0,0,0,0.26);
+                 border-radius: 50%;">
+  </button>
+
+</div>
+     
         </form>
         
     </div>

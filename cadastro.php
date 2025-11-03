@@ -24,6 +24,13 @@
 
   <link href="./material_design/dependencias/snackbar.min.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    .panel { border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+    .panel-heading { padding: 12px 16px; }
+    .header-flex { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .header-title { display: inline-flex; align-items: center; gap: 8px; margin: 0; font-size: 18px; }
+    @media (min-width: 576px) { .header-title { font-size: 20px; } }
+  </style>
   
 </head>
 <body>
@@ -33,17 +40,14 @@
   <!-- Form -->
     <div class="panel panel-info">
       <div class="panel-heading">
-        <table style="width:100%">
-            <tr>
-                <th> <img src="./img/arranchamento_72x72.png" height="48">
-                    <font style="font-size:16px;margin-left:2px;position: relative;top: 7px"><b>Nova conta</font>
-                </th>
-                <th >
-                    <button onclick="history.back();" class="buttonvoltar"></button>
-                </th>
-            </tr>
-        </table>       
-    </div>
+        <div class="header-flex">
+          <h1 class="header-title">
+            <img src="./img/arranchamento_72x72.png" height="40" alt="Arranchamento">
+            <b>Nova conta</b>
+          </h1>
+          <a href="javascript:history.back()" class="btn btn-outline-secondary btn-sm">← Voltar</a>
+        </div>
+      </div>
       <div class="panel-body" method="post" >
         <?php
 

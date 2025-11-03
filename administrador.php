@@ -47,6 +47,15 @@
 
     <link href="./material_design/dependencias/snackbar.min.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">    
+    <style>
+        .panel { border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+        .panel-heading { padding: 12px 16px; }
+        .header-flex { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+        .header-title { display: inline-flex; align-items: center; gap: 8px; margin: 0; font-size: 18px; }
+        @media (min-width: 576px) { .header-title { font-size: 20px; } }
+        .icon-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; }
+        .icon-grid a { text-decoration: none; }
+    </style>
     
     </head>
 <body onload="tamanho_elemento();" class="fundo" id="bodyy">
@@ -54,19 +63,16 @@
 <div class="container" id="container">
     <div class="panel panel-info" style="margin-top: -21px">
         <div class="panel-heading">
-            <table style="width:100%">
-                <tr>
-                    <th >
-                        <img src="./img/arranchamento_72x72.png" height="48">
-                        <font style="font-size:16px;margin-left:2px;position: relative;top: 7px"><b>Administrador</b></font>
-                    </th>
-                    <th style="text-align:right">
-                        <a href="logout.php" title="Sair" class="botaosair"><img src="./img/sair.png"></a>
-                        <a href="arranchamento_form.php" title="Arranchamento" class="botaosair"><img src="./img/arranchamento.png"></a>
-                    </th>
-                </tr>
-            </table>
-
+            <div class="header-flex">
+                <h1 class="header-title">
+                    <img src="./img/arranchamento_72x72.png" height="40" alt="Arranchamento">
+                    <b>Administrador</b>
+                </h1>
+                <div>
+                    <a href="inserir_cardapio.php" title="Inserir Cardápio" class="btn btn-primary btn-sm">Inserir Cardápio</a>
+                    <a href="logout.php" title="Sair" class="btn btn-outline-danger btn-sm">Sair</a>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -74,20 +80,22 @@
 
     <!--Ícones da área de Administrador-->
     <div class="panel-body">
-        <div style="margin-top:0px;
-    display:                 -webkit-flex; /* Safari */
-    display:                 flex;
-    -webkit-flex-wrap:       wrap;         /* Safari 6.1+ */
-    flex-wrap:               wrap;
-    -webkit-justify-content: center;       /* Safari 6.1+ */
-    justify-content:         center;
-    ">
+        <div class="icon-grid" style="margin-top:0px;">
             <?php
 
         //icone_adm('','./img/bloquear.png','Bloqueio de Rancho - Em breve');
         //icone_adm('','./img/expedientes_diferenciados.png','Expedientes Diferenciados - Em breve');
         //icone_adm('','./img/configuracoes.png','Gerenciamento de Contas - Em breve');
         icone_adm('./relatorio','./img/relatorios.png','<b><font color="#??????">Relatórios</font></b>');
+        ?>
+        </div>
+        <div class="icon-grid" style="margin-top:0px;">
+            <?php
+
+        //icone_adm('','./img/bloquear.png','Bloqueio de Rancho - Em breve');
+        //icone_adm('','./img/expedientes_diferenciados.png','Expedientes Diferenciados - Em breve');
+        //icone_adm('','./img/configuracoes.png','Gerenciamento de Contas - Em breve');
+        icone_adm('./inserir_cardapio.php','./img/cardapio.jpg','<b><font color="#??        ????">Cardápio</font></b>');
         ?>
         </div>
     </div>
